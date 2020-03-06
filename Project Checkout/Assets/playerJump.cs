@@ -5,23 +5,31 @@ using UnityEngine;
 public class playerJump : MonoBehaviour
 {
     // Start is called before the first frame update
-    Rigidbody2D rb;//reference to Rigidbody2D on player
+    private Rigidbody2D rb;
+
+    private bool grounded;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();//access Rigidbody2D with GetComponent
+        rb = GetComponent<Rigidbody2D>();
     }
+
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump"))//if jump button called
+        if(Input.GetButtonDown("Jump"))
         {
-            Jump();//call jump function
+            rb.AddForce(Vector2.up * 2.5f, ForceMode2D.Impulse);
+
+            grounded = false;
         }
     }
 
-    private void Jump()
+    void OnCollisionEnter(Collision collision)
     {
-        rb.AddForce(transform.up * 150f);//when called, send a force along Rigidbody2D to make it jump
+        if (collision.gameObject.tag == ("Ground") && grounded == false)
+        {
+            grounded = true;
+        }
     }
-}   
+}
