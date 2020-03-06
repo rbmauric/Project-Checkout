@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public int health;
+    public int health = 80;
     public List<string> items;
 }
