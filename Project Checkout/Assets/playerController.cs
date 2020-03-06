@@ -8,12 +8,17 @@ public class playerController : MonoBehaviour
     public float maxSpeed; //Fastest speed the player can move
 
     Rigidbody2D mybody2d; //Reference to Rigidbody2D in player model
+
     Animator anim; //Reference to animator and enable access to variables in unity
+
     private bool lookingright; //if character is facing right
+
     void Start()
     {
         mybody2d = GetComponent<Rigidbody2D>();//stores reference to Rigidbody2D in mybody2d
+
         anim = GetComponent<Animator>();//stores reference to Animator in anim
+
         lookingright = true;
     }
 
@@ -25,6 +30,8 @@ public class playerController : MonoBehaviour
         anim.SetFloat("speed", Mathf.Abs(adv));
 
         mybody2d.velocity = new Vector2(adv*maxSpeed, mybody2d.velocity.y);//x variable of Rigidbody2D affected by adv, not y
+
+        
 
         if(adv > 0 && !lookingright)//checking if character is looking right or not
         {
