@@ -18,11 +18,13 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        //Setting the Player health to max
     }
 
     // Update is called once per frame
     void Update()
     {
+        //PlacerHolder to get the player to take damage
         if(Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
 
     }
 
+    //The damage subtraction
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
