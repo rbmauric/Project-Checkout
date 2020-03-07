@@ -5,31 +5,31 @@ using UnityEngine;
 public class playerJump : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
-    private bool grounded;
+    public bool grounded = false;//initially floats above surface
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();//reference to Rigidbody in character
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetButtonDown("Jump") && grounded)//if jump button is pressed and character is grounded
         {
-            rb.AddForce(Vector2.up * 2.5f, ForceMode2D.Impulse);
-
-            grounded = false;
+            rb.AddForce(Vector2.up * 2.5f, ForceMode2D.Impulse);//make character jump
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)//when player hits ground/ground checking
     {
-        if (collision.gameObject.tag == ("Ground") && grounded == false)
-        {
-            grounded = true;
-        }
+        grounded = true;
+    }
+
+    void OnCollisionExit2D(Collision2D collision)//when player stops hitting ground
+    {
+        grounded = false;
     }
 }
