@@ -7,12 +7,14 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
 
     public Transform attackPoint;
+    public Transform rangeAttackPoint;
     public int attackDamage = 40;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
     public float attackRate = 0.5f;
     float nextAttackTime = 0f;
+    public bool rangeAttack = false;
 
     // Update is called once per frame
     void Update()
@@ -31,15 +33,33 @@ public class PlayerCombat : MonoBehaviour
     {
         //Play Attack Animation
         animator.SetTrigger("Attack");
-        //Check if enemy is in range
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
-        //Damage enemy
-        foreach(Collider2D enemy in hitEnemies)
+        if (rangeAttack == false)
         {
-            Debug.Log("We hit " + enemy.name);
-            enemy.GetComponent<Enemy>().takeDamage(attackDamage);
+            //Check if enemy is in range
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            //Damage enemy
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("We hit " + enemy.name);
+                enemy.GetComponent<Enemy>().takeDamage(attackDamage);
+            }
         }
+
+        if (rangeAttack == true)
+        {
+            attackRange = 1.0f;
+            //Check if enemy is in range
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            //Damage enemy
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                Debug.Log("We hit " + enemy.name);
+                enemy.GetComponent<Enemy>().takeDamage(attackDamage);
+            }
+        }
+
     }
 
     void OnDrawGizmosSelected()
@@ -47,6 +67,7 @@ public class PlayerCombat : MonoBehaviour
         if (attackPoint == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);    
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(rangeAttackPoint.position, attackRange);
     }
 }
