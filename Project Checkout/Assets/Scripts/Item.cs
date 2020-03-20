@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Item!");
-            other.GetComponent<PlayerStats>().items.Add(gameObject.name);
+            other.GetComponentInParent<PlayerStats>().items.Add(gameObject.name);
             Destroy(gameObject);
         }
     }

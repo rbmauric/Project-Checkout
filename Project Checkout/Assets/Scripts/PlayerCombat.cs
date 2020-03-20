@@ -4,70 +4,86 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    public Animator animator;
+    private Animator animator;
+    public GameObject attackHitBox;
+    public GameObject rangeAttackHitBox;
 
-    public Transform attackPoint;
-    public Transform rangeAttackPoint;
     public int attackDamage = 40;
-    public float attackRange = 0.5f;
-    public LayerMask enemyLayers;
+    public int rangeAttackDamage = 30;
+    public float attackSpeed = 0.7f;
+    private float debuffTimer;
 
-    public float attackRate = 0.5f;
-    float nextAttackTime = 0f;
+    public bool doubleAttack = false;
     public bool rangeAttack = false;
+    public bool projectileAttack = false;
+    public bool isAttacking = false;
+
+    private void Start()
+    {
+        debuffTimer = 0f;
+        attackHitBox.SetActive(false);
+        rangeAttackHitBox.SetActive(false);
+        animator = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextAttackTime)
+        if (Input.GetButtonDown("Fire1") && !isAttacking && GetComponent<PlayerMovement>().groundCheck)
         {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+
+            //Play Attack Animation
+            animator.SetTrigger("Attack");
+
+            isAttacking = true;
+            StartCoroutine(Attack());
         }
     }
 
-    void Attack()
+    IEnumerator Attack()
     {
-        //Play Attack Animation
-        animator.SetTrigger("Attack");
-
-        if (rangeAttack == false)
-        {
-            //Check if enemy is in range
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-            //Damage enemy
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                Debug.Log("We hit " + enemy.name);
-                enemy.GetComponent<Enemy>().takeDamage(attackDamage);
-            }
-        }
-
+        PlayerMovement player = GetComponent<PlayerMovement>();
         if (rangeAttack == true)
         {
-            attackRange = 1.0f;
-            //Check if enemy is in range
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-            //Damage enemy
-            foreach (Collider2D enemy in hitEnemies)
-            {
-                Debug.Log("We hit " + enemy.name);
-                enemy.GetComponent<Enemy>().takeDamage(attackDamage);
-            }
+            rangeAttackHitBox.SetActive(true);
+            debuffTimer++;
         }
 
-    }
+        if (doubleAttack == true)
+        {
+            attackDamage = 60;
+            rangeAttackDamage = 40;
+            debuffTimer++;
+            GetComponentInParent<ProjectileManager>().proj.projDamage = 40;
+        }
 
-    void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
+        if (projectileAttack == true)
+        {
+            GetComponentInParent<ProjectileManager>().instantiateProjectile();
+            debuffTimer++;
+        }
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.DrawWireSphere(rangeAttackPoint.position, attackRange);
+        attackHitBox.SetActive(true);
+        
+
+        if (debuffTimer > 1)
+        {
+            StartCoroutine(player.cantMove(player.moveTime * debuffTimer));
+            player.speed /= debuffTimer;
+            player.jumpVelocity /= (debuffTimer / 2);
+            yield return new WaitForSeconds(attackSpeed * debuffTimer);
+            player.speed *= debuffTimer;
+            player.jumpVelocity *= (debuffTimer / 2);
+
+        }
+        else
+        {
+            StartCoroutine(player.cantMove(player.moveTime));
+            yield return new WaitForSeconds(attackSpeed);
+        }
+        attackHitBox.SetActive(false);
+        rangeAttackHitBox.SetActive(false);
+        isAttacking = false;
+        debuffTimer = 0f;
     }
 }
