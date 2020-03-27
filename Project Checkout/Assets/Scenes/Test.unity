@@ -1394,7 +1394,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132965267}
-  - component: {fileID: 2132965268}
   - component: {fileID: 2132965269}
   - component: {fileID: 2132965270}
   - component: {fileID: 2132965271}
@@ -1419,24 +1418,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2132965268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132965266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e68c950d5304f7429ca98512d3ef89b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthBar: {fileID: 243206342}
-  speed: 5
-  jumpForce: 2
-  playerRB: {fileID: 0}
 --- !u!212 &2132965269
 SpriteRenderer:
   m_ObjectHideFlags: 0

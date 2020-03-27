@@ -32,17 +32,22 @@ public class RangedEnemy : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-
-        if (timer >= timeBetweenAttacks && playerInRange != false)
+    /*
+        if (timer >= timeBetweenAttacks && playerInRange == true)
         {
             Shoot();
-        }
+        }   */
         //---------------------------------------
- /*       if(playerRB < ranged)
+        
+          float minAttackDistance = 1.5f;
+    /*      float distance = Vector2.Distance(player.transform.position, .position);
+ 
+        if (distance < minAttackDistance)
         {
             Shoot();
         }
-        */
+         
+      */   
 
     }
 
