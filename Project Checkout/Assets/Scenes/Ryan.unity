@@ -140,12 +140,12 @@ GameObject:
   - component: {fileID: 26256211}
   - component: {fileID: 26256212}
   m_Layer: 9
-  m_Name: Square
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &26256209
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -577,7 +577,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.000030518, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1908,7 +1908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1818400598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2903,7 +2903,7 @@ PrefabInstance:
     - target: {fileID: 3450440152974481477, guid: e5b220d699e33984db5a98934f097a6a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3558098297571666273, guid: e5b220d699e33984db5a98934f097a6a,
         type: 3}
@@ -2928,6 +2928,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013617303972571142, guid: 7b80ccc72b6903345917ec3a40f2c573,
+        type: 3}
+      propertyPath: m_Simulated
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4013617303972571143, guid: 7b80ccc72b6903345917ec3a40f2c573,
         type: 3}
