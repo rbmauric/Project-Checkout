@@ -4,8 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MeleeEnemy
-  - RangeEnemy
+  - Enemy
+  - Item
+  - playerAttack
+  - Ground
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - Background
   - Default
   - Foreground
-  - 
-  - 
+  - Enemy
+  - Player
   - 
   - 
   - 
@@ -42,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2039525903
+    locked: 0
+  - name: Foreground
+    uniqueID: 3753691063
     locked: 0
