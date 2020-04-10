@@ -8,6 +8,7 @@ TagManager:
   - Item
   - playerAttack
   - Ground
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -42,11 +43,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 2039525903
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2039525903
     locked: 0
   - name: Foreground
     uniqueID: 3753691063
