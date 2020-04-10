@@ -11,8 +11,8 @@ public class PlayerMeleeTrigger : MonoBehaviour
         {
             test.GetComponent<MeleeEnemy>().Damage();
         }
-        /*
-        else if (test.CompareTag("RangeEnemy"))
+        
+      /*  else if (test.CompareTag("RangeEnemy"))
         {
             test.GetComponent<RangeEnemy>().Damage();
         }

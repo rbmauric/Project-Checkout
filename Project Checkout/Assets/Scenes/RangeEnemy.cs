@@ -82,4 +82,9 @@ public class RangeEnemy : MonoBehaviour
 
     }
 
+    public void Damage()
+    {
+        Destroy(gameObject);
+    }
+
 }
