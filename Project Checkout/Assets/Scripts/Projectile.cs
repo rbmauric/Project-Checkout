@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
             shootLeft();
         }
 
-        Destroy(gameObject, 0.4f);
+        Destroy(gameObject, 5);
     }
 
     void shootRight()
@@ -31,14 +31,5 @@ public class Projectile : MonoBehaviour
     void shootLeft()
     {
         rb.velocity = transform.right * (-1 * projSpeed);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Enemy")
-        {
-            other.GetComponent<Enemy>().takeDamage(projDamage);
-            Destroy(gameObject);
-        }
     }
 }

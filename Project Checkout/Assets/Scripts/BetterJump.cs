@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class BetterJump : MonoBehaviour
 {
-    public Rigidbody2D rb;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -8,15 +8,20 @@ public class PlayerMovement : MonoBehaviour
     public float jumpVelocity;
     public float moveTime = 0.2f;
     private Animator animator;
-    public int jumpHeight = 5;
 
     public bool right;
     public bool groundCheck;
     public bool canFlip;
     public bool canMove;
+    private bool moving = false;
+
+    public SoundManager sm;
+    public float soundLoop = 0.3f;
+    private bool soundActive;
 
     private void Start()
     {
+        sm.Play("Distant Stars - 01 Total Eclipse");
         canMove = true;
         right = true;
         animator = GetComponent<Animator>();
@@ -30,27 +35,37 @@ public class PlayerMovement : MonoBehaviour
             playerMovement();
             Jump();
             Flip();
+
+            if (groundCheck && moving)
+            {
+                if (!soundActive)
+                {
+                    StartCoroutine(runningSound());
+                }
+            }
         }
         
     }
 
     void playerMovement()
     {
-        if (Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal") && canMove)
         {
+            moving = true;
             animator.SetFloat("Speed", speed);
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f);
             transform.position += movement * Time.deltaTime * speed;
         }
         else
         {
+            moving = false;
             animator.SetFloat("Speed", 0);
         }
     }
 
     void Flip()
     {
-        if (Input.GetAxis("Horizontal") > 0 && !right || Input.GetAxis("Horizontal") < 0 & right)
+        if (Input.GetAxis("Horizontal") > 0 && !right || Input.GetAxis("Horizontal") < 0 && right)
         {
             right = !right;
             Vector3 scale = transform.localScale;
@@ -71,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator cantMove(float moveTimer)
     {
-        canMove = false;
         yield return new WaitForSeconds(moveTimer);
         if (GetComponentInParent<PlayerCombat>().isAttacking)
         {
@@ -79,5 +93,14 @@ public class PlayerMovement : MonoBehaviour
             GetComponentInParent<PlayerCombat>().rangeAttackHitBox.SetActive(false);
         }
         canMove = true;
+    }
+
+    IEnumerator runningSound()
+    {
+        soundActive = true;
+        sm.Play("Player Run");
+        yield return new WaitForSeconds(soundLoop);
+        soundActive = false;
+
     }
 }

@@ -6,9 +6,14 @@ TagManager:
   tags:
   - Enemy
   - Item
-  - playerAttack
   - Ground
   - Hazard
+  - PlayerAttack
+  - EnemyAttack
+  - PlayerProjectile
+  - playerAttack
+  - EnemyProjectile
+  - RangedEnemy
   layers:
   - Default
   - TransparentFX

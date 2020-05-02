@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
         {
             Debug.Log("Item!");
             other.GetComponentInParent<PlayerStats>().items.Add(gameObject.name);
+            FindObjectOfType<SoundManager>().Play("Item Pickup");
+            PlayerStats.itemCount++;
             Destroy(gameObject);
         }
     }
