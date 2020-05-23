@@ -970,12 +970,13 @@ MonoBehaviour:
   attackHitbox: {fileID: 112214653455756693}
   detectionBox: {fileID: 731560833654911975}
   chaseRange: 45
-  attackRange: 17
+  attackRange: 16.5
   speed: 15
   index: 0
   attackDelay: 0.01
   cooldownTime: 1
   chargeTime: 0.5
+  soundLoop: 10
 --- !u!50 &6006041545190687771
 Rigidbody2D:
   serializedVersion: 4

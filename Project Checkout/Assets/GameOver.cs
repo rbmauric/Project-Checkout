@@ -14,11 +14,7 @@ public class GameOver : MonoBehaviour
 
     public void PlayAgain()
     {
-        Debug.Log("PlayAgain");
-        PlayerCombat.doubleAttack = false;
-        PlayerCombat.rangeAttack = false;
-        PlayerCombat.projectileAttack = false;
-        SceneManager.LoadScene(1);
+        GameManager.restartLevel();
     }
 
     public void MainMenu()

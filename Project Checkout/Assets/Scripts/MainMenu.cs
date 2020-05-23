@@ -84,7 +84,7 @@ public class MainMenu : MonoBehaviour
     IEnumerator buttonPressed()
     {
         yield return new WaitForSeconds(0.3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        GameManager.restartLevel();
     }
 }
 

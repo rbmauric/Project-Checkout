@@ -26,13 +26,13 @@ public class RangeEnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (enemySpawned && !spawnerActive && numEnemies != 0)
+        if (enemySpawned && !spawnerActive && numEnemies > 0)
         {
             Debug.Log("Spawning new enemy");
             StartCoroutine(spawnTimer());
         }
 
-        if (aliveEnemies == 0 && numEnemies == 0 && !enemiesDead)
+        if (aliveEnemies <= 0 && numEnemies <= 0 && !enemiesDead)
         {
             cam.GetComponent<CameraZoom>().zoomOut = false;
             cam.GetComponent<CameraZoom>().zoomIn = true;
@@ -55,7 +55,7 @@ public class RangeEnemyManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && !enemySpawned && numEnemies != 0)
+        if (other.tag == "Player" && !enemySpawned && numEnemies > 0)
         {
             for (int i = 0; i < walls.Length; i++)
             {

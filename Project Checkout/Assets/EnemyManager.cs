@@ -28,13 +28,13 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (enemySpawned && !spawnerActive && numEnemies != 0)
+        if (enemySpawned && !spawnerActive && numEnemies > 0)
         {
             Debug.Log("Issue here");
             StartCoroutine(spawnTimer());
         }
 
-        if (aliveEnemies == 0 && numEnemies == 0 && !enemiesDead)
+        if (aliveEnemies <= 0 && numEnemies <= 0 && !enemiesDead)
         {
             cam.GetComponent<CameraZoom>().zoomOut = false;
             cam.GetComponent<CameraZoom>().zoomIn = true;
